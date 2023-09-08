@@ -8,9 +8,9 @@
 > class RESULT:
 >
 > ​	boxes:	numpy array, 偵測到的bounding box的xyxy座標（左上、右下）	[1st b-box, 2nd b-box, ...]
-> ​	cls:		  numpy array, 偵測到的bounding box的類別									   [1st cls, 2nd cls, ...]
-> ​	conf:       numpy array, 偵測到的bounding box的信心值								   [1st conf, 2nd conf, ...]
-> ​	img: 		numpy array, 偵測的結果圖
+> ​	cls:	numpy array, 偵測到的bounding box的類別						[1st cls, 2nd cls, ...]
+> ​	conf:   numpy array, 偵測到的bounding box的信心值					[1st conf, 2nd conf, ...]
+> ​	img: 	numpy array, 偵測的結果圖
 >
 > ​	show:	 展示結果圖(壓縮過的)
 >
