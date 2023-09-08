@@ -16,17 +16,22 @@ import numpy as np
 """
 
 class RESULT:
-    def __init__(self, boxes, cls, conf, names):
+    def __init__(self, boxes, cls, conf, names, img):
         self.boxes = boxes
         self.cls = cls
         self.conf = conf
         self.names = names
+        self.img = img
 
     def __len__(self):
         return len(self.boxes)
 
     def __getitem__(self, idx):
         return {'cls': self.cls[idx], 'conf': self.conf[idx], 'box': self.boxes[idx]}
+
+    def show(self):
+        cv2.imshow('test', self.img)
+        cv2.waitKey(0)
 
 
 def read_images(path):
@@ -53,15 +58,15 @@ def main(model, img):
     sf = np.array([source.shape[0] / 640, source.shape[1] / 640])
     source = preprocess(source)
     result = model.predict(source, conf=0.25)
-    print(result.plot())
 
     boxes = result[0].boxes.xyxy.numpy()
     boxes = scale_box(boxes, sf)
     cls = result[0].boxes.cls.numpy()
     conf = result[0].boxes.conf.numpy()
+    img = cv2.cvtColor(result[0].plot(), cv2.COLOR_BGR2RGB)
     names = result[0].names
 
-    result = RESULT(boxes, cls, conf, names)
+    result = RESULT(boxes, cls, conf, names, img)
     return result
                 
 if __name__ == '__main__':
@@ -70,3 +75,4 @@ if __name__ == '__main__':
     image = os.path.join('0504', '103FTASK', 'MAX_0435.JPG')
     result = main(model, image)
     print(result[0])
+    result.show()

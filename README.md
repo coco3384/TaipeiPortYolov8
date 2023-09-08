@@ -1,16 +1,20 @@
 #### detect.py
 
-> detect 裡的 main(model, img) 做港區岸邊設施的物件偵測，輸出為REUSLT CLASS.
->
+* detect 裡的 main(model, img) 做港區岸邊設施的物件偵測，輸出為REUSLT CLASS.
+* 在偵測的時候會壓縮圖片來提高偵測效果，因此偵測的結果圖是壓縮後(640 x 640)的。所以我想說我用資料格式存結果，資料格式的boxes裡的座標是原圖尺寸的結果，可能比較方便平台的展圖（？）
+
 > main(**model path**, **img path**)
 
 > class RESULT:
 >
-> ​	boxes:	numpy array, 偵測到的bounding box的xyxy座標（左上、右下）
-> ​	cls:		  numpy array, 偵測到的bounding box的類別
-> ​	conf:       numpy array, 偵測到的bounding box的信心值
+> ​	boxes:	numpy array, 偵測到的bounding box的xyxy座標（左上、右下）	[1st b-box, 2nd b-box, ...]
+> ​	cls:		  numpy array, 偵測到的bounding box的類別									   [1st cls, 2nd cls, ...]
+> ​	conf:       numpy array, 偵測到的bounding box的信心值								   [1st conf, 2nd conf, ...]
+> ​	img: 		numpy array, 偵測的結果圖
 >
-> Result[0]: 第一個偵測到的物件、以此類推
+> ​	show:	 展示結果圖(壓縮過的)
+>
+> Result[0]: 第一個偵測到的物件，以dict的方式回傳
 
 ____
 
